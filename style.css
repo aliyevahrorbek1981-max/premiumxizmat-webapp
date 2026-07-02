@@ -1,0 +1,220 @@
+:root {
+  --bg: var(--tg-theme-bg-color, #0f1014);
+  --bg-secondary: var(--tg-theme-secondary-bg-color, #191a20);
+  --text: var(--tg-theme-text-color, #f3f3f0);
+  --hint: var(--tg-theme-hint-color, #8b8c96);
+  --separator: var(--tg-theme-section-separator-color, rgba(255,255,255,0.08));
+  --accent: #f0b429;
+  --accent-dim: #7a5c17;
+  --button-text: var(--tg-theme-button-text-color, #14140f);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Live kurs ticker: mahsulotning o'zagi shu — narx real vaqtli --- */
+.ticker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(90deg, rgba(240,180,41,0.14), rgba(240,180,41,0.02));
+  border-bottom: 1px solid var(--separator);
+  font-size: 12.5px;
+  color: var(--accent);
+  letter-spacing: 0.2px;
+}
+.ticker-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(240,180,41,0.6);
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(240,180,41,0.55); }
+  70%  { box-shadow: 0 0 0 6px rgba(240,180,41,0); }
+  100% { box-shadow: 0 0 0 0 rgba(240,180,41,0); }
+}
+
+.hero {
+  padding: 20px 20px 8px;
+  text-align: center;
+}
+.hero-badge {
+  width: 44px; height: 44px;
+  margin: 0 auto 10px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  background: radial-gradient(circle at 30% 30%, var(--accent), var(--accent-dim));
+  box-shadow: 0 6px 18px rgba(240,180,41,0.25);
+}
+.hero h1 {
+  margin: 0 0 4px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+.hero p {
+  margin: 0;
+  color: var(--hint);
+  font-size: 13px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 14px 16px 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--bg-secondary);
+  color: var(--hint);
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1px solid var(--separator);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.tab.active {
+  background: var(--accent);
+  color: var(--button-text);
+  border-color: var(--accent);
+}
+
+.items {
+  padding: 6px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--separator);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.15s;
+}
+.item-card:active {
+  transform: scale(0.98);
+  border-color: var(--accent);
+}
+.item-name {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.item-price {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.empty {
+  text-align: center;
+  color: var(--hint);
+  padding: 40px 20px;
+  font-size: 13.5px;
+}
+
+/* --- Buyurtma sheet (pastdan chiqadigan tasdiqlash paneli) --- */
+.sheet-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+.sheet-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sheet {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  border-radius: 20px 20px 0 0;
+  padding: 10px 20px calc(20px + env(safe-area-inset-bottom));
+  transform: translateY(100%);
+  transition: transform 0.25s cubic-bezier(.32,.72,0,1);
+  z-index: 11;
+  text-align: center;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.35);
+}
+.sheet.open { transform: translateY(0); }
+
+.sheet-handle {
+  width: 36px; height: 4px;
+  background: var(--separator);
+  border-radius: 999px;
+  margin: 6px auto 14px;
+}
+.sheet-icon {
+  width: 48px; height: 48px;
+  margin: 0 auto 10px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  background: radial-gradient(circle at 30% 30%, var(--accent), var(--accent-dim));
+}
+.sheet h2 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+.sheet-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.sheet-hint {
+  color: var(--hint);
+  font-size: 12.5px;
+  line-height: 1.5;
+  margin: 0 0 18px;
+}
+.sheet-confirm {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: var(--accent);
+  color: var(--button-text);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.sheet-cancel {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: var(--hint);
+  font-size: 14px;
+  cursor: pointer;
+}

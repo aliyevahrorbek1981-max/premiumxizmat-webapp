@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>PremiumXizmat</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="ticker" id="ticker">
+  <span class="ticker-dot"></span>
+  <span id="tickerText">Kurs yuklanmoqda…</span>
+</div>
+
+<header class="hero">
+  <div class="hero-badge">⭐</div>
+  <h1>PremiumXizmat</h1>
+  <p>Telegram Premium, Stars va o'yin valyutalari — eng sof narxda</p>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main class="items" id="items"></main>
+
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-icon" id="sheetIcon">⭐</div>
+  <h2 id="sheetTitle">—</h2>
+  <div class="sheet-price" id="sheetPrice">—</div>
+  <p class="sheet-hint">Buyurtmani tasdiqlang — keyingi bosqichda bot sizdan
+    Telegram username yoki o'yin ID'ingizni so'raydi.</p>
+  <button class="sheet-confirm" id="sheetConfirm">Buyurtma berish</button>
+  <button class="sheet-cancel" id="sheetCancel">Bekor qilish</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
